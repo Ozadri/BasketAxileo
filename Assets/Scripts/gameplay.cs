@@ -7,11 +7,13 @@ public class gameplay : MonoBehaviour
 {
     public Text score;
     public List<ParticleSystem> fireworks;
-    private int nbScore = 0;
+    public int nbScore = 0;
+    public AudioClip musicClip;
+    public AudioSource musicSource;
     // Start is called before the first frame update
     void Start()
     {
-        score.text = "Panier(s) : " + nbScore;
+        musicSource.clip = musicClip;
     }
 
     // Update is called once per frame
@@ -26,16 +28,14 @@ public class gameplay : MonoBehaviour
         {
             particleSystem.Play();
         }
+        
+        musicSource.Play();
     }
 
     void OnTriggerEnter(Collider other)
     {
         nbScore++;
-        score.text = "Panier(s) : " + nbScore;
+        score.text = "SCORE : " + nbScore;
         StartFireWorks();
-        if (nbScore >= 10)
-        {
-            score.text = "TU AS GAGNE ! VIENT NOUS VOIR !";
-        }
     }
 }
